@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/VERSION-0.0.1a-success?style=for-the-badge)
+![Version](https://img.shields.io/badge/VERSION-0.0.1a-success?style=for-the-badge) ![Status](https://img.shields.io/badge/status-in_development-orange?style=for-the-badge)
 
 # ClioIVDigitalDash
 A place for me to store all my resources for my Renault Clio IV Digital Dash Project using RealDash, Raspberry Pi and SocketCAN.
