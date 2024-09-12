@@ -1,0 +1,20 @@
+{
+		"type": "Code-39",
+		"size": {
+			"width": "250px",
+			"height": "150px"
+		},
+		"output-format": "png",
+		"value": {
+			"prefix": "DD",
+			"separator_1": "-",
+			"revision": "0.0",
+			"separator_2": "-",
+			"serial_number": "000000"
+			"example": "DD-1.0-516894"
+		}
+}
+
+
+
+
