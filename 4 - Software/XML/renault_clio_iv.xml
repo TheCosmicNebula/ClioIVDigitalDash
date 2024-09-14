@@ -3,10 +3,13 @@
 
 	<frames>
 	
+		<frame baseId="0x186">
+			<value targetId="37" offset="0" length="2" conversion="V*0.125"></value> <!-- speed -->
+		</frame>
+	
 		<frame baseId="0x29a">
 			<value targetId="64" units="km/h" offset="4" length="2" conversion="V*0.01"></value> <!-- speed -->
 		</frame>
-	
 	
 		<frame baseId="0x699">
 			<value targetId="173" units="C" offset="1" length="1" conversion="V*0.5"></value> <!-- temperature -->
