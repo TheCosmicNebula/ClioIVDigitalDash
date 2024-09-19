@@ -10,7 +10,7 @@
 		
 		<!--  -->
 		<frame id="0x0c6" size="4">
-			<value name="x98_rs: Wheel Angle" offset="0" length="2" conversion="(32768-B0*256-B1)/20" rangeMin="-200" rangeMax="200"></value> <!-- steering wheel angle [deg] -->
+			<value name="x98_rs: Wheel Angle" offset="0" length="2" conversion="(32768-B0*256-B1)/10"></value> <!-- steering wheel angle [deg] -->
 		</frame>
 
 		<!--  -->
@@ -69,7 +69,7 @@
 	
 		<!--  -->
 		<frame id="0x1f6">
-			<value targetId="56" bitstart="10" bitcount="1"></value> <!-- engine running -->
+			<value targetId="56" bitstart="10" bitcount="1" units="bit"></value> <!-- engine running -->
 
 			<value name="x98_rs: AC Pressure" bitstart="23" bitcount="9" conversion="V/10" units="bar"></value> <!-- ac pressure (bar) -->
 		</frame>
@@ -164,15 +164,15 @@
 	
 		<!-- automatic transmission - shifter -->
 		<frame id="0x3f7" size="3">
-			<value name="x98_rs: Drive Engaged" bitstart="0" bitcount="1"></value> <!-- drive engaged -->
-			<value name="x98_rs: Shift Mode" bitstart="1" bitcount="1" enum="1:A,0:M"></value> <!-- shift mode -->
-			<value name="x98_rs: Shift Mode Full" bitstart="1" bitcount="1" enum="1:Automatic,0:Manual"></value> <!-- shift mode full -->
+			<value name="x98_rs: Drive Engaged" bitstart="1" bitcount="1" units="bit"></value> <!-- drive mode engaged -->
+			<value name="x98_rs: Shift Mode" bitstart="2" bitcount="1" enum="1:A,0:M"></value> <!-- shift mode -->
+			<value name="x98_rs: Shift Mode Full" bitstart="2" bitcount="1" enum="1:Automatic,0:Manual"></value> <!-- shift mode full -->
 
-			<value name="139" bitstart="2" bitcount="3" conversion="V+1"></value> <!-- current gear -->
-			<value name="x98_rs: Shifter Position" bitstart="2" bitcount="3" conversion="V/8" enum="1:P,2:R,3:N,#:D"></value> <!-- shifter position -->
-			<value name="x98_rs: Shifter Position Full" bitstart="2" bitcount="3" conversion="V/8" enum="1:Park,2:Reverse,3:Neutral,#:Drive"></value> <!-- shifter position full -->
+			<value name="139" bitstart="3" bitcount="3" conversion="V+1"></value> <!-- current gear -->
+			<value name="x98_rs: Shifter Position" bitstart="3" bitcount="3" conversion="V/8" enum="1:P,2:R,3:N,#:D"></value> <!-- shifter position -->
+			<value name="x98_rs: Shifter Position Full" bitstart="3" bitcount="3" conversion="V/8" enum="1:Park,2:Reverse,3:Neutral,#:Drive"></value> <!-- shifter position full -->
 
-			<value name="x98_rs: Press Brake Pedal" bitstart="11" bitcount="1"></value> <!-- press brake pedal -->
+			<value name="x98_rs: Press Brake Pedal" bitstart="11" bitcount="1" units="bit"></value> <!-- press brake pedal -->
 		</frame>
 	
 		<!--  -->
@@ -217,11 +217,11 @@
 
 		<!--  -->
 		<frame id="0x4f8">
-			<value targetId="164" bitstart="4" bitcount="1"></value> <!-- parking brake -->
+			<value targetId="164" bitstart="4" bitcount="1" units="bit"></value> <!-- parking brake -->
 
 			<!-- <value targetId="272" bitstart="8" bitcount="2" units="bit"></value> airbag light -->
-			<value name="x98_rs: Speed Unit" bitstart="13" bitcount="1" enum="1:kmh,0:mph"></value> <!-- speed unit -->
-			<value name="x98_rs: Passenger Airbag Light" bitstart="16" bitcount="2"></value> <!-- passenger airbag light -->
+			<value name="x98_rs: Speed Unit" bitstart="13" bitcount="1" enum="0:kmh,1:mph,#:kmh"></value> <!-- speed unit -->
+			<value name="x98_rs: Passenger Airbag Light" bitstart="16" bitcount="2" units="bit"></value> <!-- passenger airbag light -->
 		</frame>
 		
 		<!--  -->
@@ -231,7 +231,7 @@
 
 		<!-- battery voltage -->
 		<frame id="0x4ac">
-			<value targetId="12" offset="0" length="1" conversion="v/10 + (14.6727 - v/10) / 2.5454"></value> <!-- battery voltage [V] -->
+			<value targetId="12" offset="1" length="1" conversion="v/10 + (14.6727 - v/10) / 2.5454"></value> <!-- battery voltage [V] -->
 			
 			<value name="x98_rs: Battery Warning" conversion="ID12 &lt; 11.5"></value> <!-- battery warning -->
 		</frame>
@@ -243,47 +243,49 @@
 
 		<!--  -->
 		<frame id="0x55d">
-			<value name="x98_rs: Vehicle Locked" bitstart="63" bitcount="1"></value> <!-- vehicle locked -->
+			<value name="x98_rs: Vehicle Locked" bitstart="63" bitcount="1" units="bit"></value> <!-- vehicle locked -->
 		</frame>
 
 		<!--  -->
 		<frame id="0x5d7" size="7">
-			<value targetId="310" bitstart="16" bitcount="28" converson="(V>>4)*0.01"></value> <!-- odometer [KM]-->
+			<!-- <value id="64" offset="0" length="2" conversion="V*0.01"></value> speed --><!-- other speed option that actually shows change -->
+
+			<value targetId="310" bitstart="16" bitcount="28" converson="V*0.01"></value> <!-- odometer [KM]-->
 		</frame>
 
 		<!--  -->
 		<frame id="0x5da">
-			<value targetId="14" offset="0" length="1" conversion="V-40" units="C"></value> <!-- coolant temperature [C] -->
+			<value targetId="14" offset="0" length="1" conversion="V/40" units="C"></value> <!-- coolant temperature [C] -->
 		</frame>
 
 		<!-- vehicle status lights, doors etc -->
 		<frame id="0x5de">
-			<value targetId="161" bitstart="1" length="1"></value> <!-- right turn signal -->
-			<value targetId="160" bitstart="2" length="1"></value> <!-- left turn signal -->
-			<value targetId="158" bitstart="3" length="1"></value> <!-- rear fog -->
-			<value targetId="392" bitstart="4" bitcount="1"></value> <!-- front fog -->
-			<value targetId="155" bitstart="5" bitcount="1"></value> <!-- side lights -->
-			<value targetId="156" bitstart="6" bitcount="1"></value> <!-- low beam -->
-			<value targetId="157" bitstart="7" bitcount="1"></value> <!-- high beam -->
-			<value targetId="309" conversion="ID155"></value> <!-- night mode -->
+			<value targetId="161" bitstart="1" length="1" units="bit"></value> <!-- right turn signal -->
+			<value targetId="160" bitstart="2" length="1" units="bit"></value> <!-- left turn signal -->
+			<value targetId="158" bitstart="3" length="1" units="bit"></value> <!-- rear fog -->
+			<value targetId="392" bitstart="4" bitcount="1" units="bit"></value> <!-- front fog -->
+			<value targetId="155" bitstart="5" bitcount="1" units="bit"></value> <!-- side lights -->
+			<value targetId="156" bitstart="6" bitcount="1" units="bit"></value> <!-- low beam -->
+			<value targetId="157" bitstart="7" bitcount="1" units="bit"></value> <!-- high beam -->
+			<value targetId="309" units="bit" conversion="ID155"></value> <!-- night mode -->
 
-			<value targetId="481" bitstart="12" bitcount="1"></value> <!-- front left door open / door 1 open-->
-			<value targetId="482" bitstart="14" bitcount="1"></value> <!-- front right door open / door 2 open-->
-			<value targetId="483" bitstart="17" bitcount="1"></value> <!-- rear left door open / door 3 open-->
-			<value targetId="484" bitstart="19" bitcount="1"></value> <!-- rear right door open / door 4 open-->
+			<value targetId="481" bitstart="12" bitcount="1" units="bit"></value> <!-- front left door open / door 1 open-->
+			<value targetId="482" bitstart="14" bitcount="1" units="bit"></value> <!-- front right door open / door 2 open-->
+			<value targetId="483" bitstart="17" bitcount="1" units="bit"></value> <!-- rear left door open / door 3 open-->
+			<value targetId="484" bitstart="19" bitcount="1" units="bit"></value> <!-- rear right door open / door 4 open-->
 			<value targetId="162" units="bit" conversion="ID481||ID482||ID483||ID484||ID485"></value> <!-- door ajar -->
 
-			<value name="x98_rs: Unlock Steering Warning" bitstart="23" bitcount="1"></value> <!-- unlock steering message -->
-			<value name="x98_rs: Auto Lock ON" bitstart="24" bitcount="1"></value> <!-- auto lock on -->
+			<value name="x98_rs: Unlock Steering Warning" bitstart="23" bitcount="1" units="bit"></value> <!-- unlock steering message -->
+			<value name="x98_rs: Auto Lock ON" bitstart="24" bitcount="1" units="bit"></value> <!-- auto lock on -->
 
-			<value name="x98_rs: Rear Wiper ON" bitstart="57" bitcount="1"></value> <!-- rear wiper -->
-			<value targetId="485" bitstart="59" bitcount="1"></value> <!-- boot open / door 5 open -->
+			<value name="x98_rs: Rear Wiper ON" bitstart="57" bitcount="1" units="bit"></value> <!-- rear wiper -->
+			<value targetId="485" bitstart="59" bitcount="1" units="bit"></value> <!-- boot open / door 5 open -->
 		</frame>
 
 		<!--  -->
 		<frame id="0x5df" size="2">
-			<value name="x98_rs: Rear Windows Active" bitstart="10" bitcount="1" conversion="1-V"></value> <!-- rear windows active -->
-			<value name="x98_rs: Rear Window Lock" bitstart="11" bitcount="1"></value> <!-- rear window lock -->
+			<value name="x98_rs: Rear Windows Active" bitstart="10" bitcount="1" units="bit" conversion="1-V"></value> <!-- rear windows active -->
+			<value name="x98_rs: Rear Window Lock" bitstart="11" bitcount="1" units="bit"></value> <!-- rear window lock -->
 		</frame>
 
 		<!--  -->
@@ -308,8 +310,8 @@
 
 		<!-- more testing required -->
 		<frame id="0x653" size="4">
-			<value targetId="272" startbit="10" bitcount="1" conversion="1-V"></value> <!-- airbag light -->
-			<value name="x98_rs: Check Airbag" conversion="ID272" enum="1:CHECK AIRBAG"></value> <!-- check airbag message -->
+			<value targetId="272" startbit="10" bitcount="1" units="bit" conversion="1-V"></value> <!-- airbag light -->
+			<value name="x98_rs: Check Airbag" conversion="ID272"></value> <!-- check airbag message -->
 			
 			<!-- <value name="x98_rs: Driver Belt" startbit="12" bitcount="2"></value> driver seat belt -->
 			<!-- <value name="x98_rs: Passenger Belt" startbit="14" bitcount="2"></value> passenger seat belt -->
@@ -337,7 +339,7 @@
 			<value name="x98_rs: Cruise Control Active" bitstart="5" bitcount="3" conversion="V=2"></value>
 			<value name="x98_rs: Speed Limiter Idle" bitstart="5" bitcount="3" conversion="V=5"></value>
 			<value name="x98_rs: Speed Limiter Active" bitstart="5" bitcount="3" conversion="V=6"></value>
-			<value targetId="65" startbit="3" bitcount="1"></value> <!-- check engine -->
+			<value targetId="65" startbit="3" bitcount="1"></value> <!-- Check Enqige -->
 			
 			<value targetId="171" offset="1" length="1" conversion="V*1.609"></value> <!-- cc / sl set speed -->
 
@@ -355,7 +357,7 @@
 		
 		<!-- can fuel information -->
 		<frame id="6fb">
-			<value targetId="170" offset="3" length="1" conversion="V/1.1"></value> <!-- fuel level % -->
+			<value targetId="170" units="%" offset="3" length="1" conversion="V/1.1"></value> <!-- fuel level % -->
 		</frame>
 		
 	</frames>
