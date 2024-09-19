@@ -231,9 +231,9 @@
 
 		<!-- battery voltage -->
 		<frame id="0x4ac">
-			<value targetId="12" offset="0" length="1" conversion="v/10 + (14.6727 - v/10) / 2.5454"></value> <!-- battery voltage [V] -->
+			<value targetId="12" offset="0" length="1" conversion="v/10+(14.6727-v/10)/2.5454"></value> <!-- battery voltage [V] -->
 			
-			<value name="x98_rs: Battery Warning" conversion="ID12 &lt; 11.5"></value> <!-- battery warning -->
+			<value name="x98_rs: Battery Warning" conversion="ID12&lt;11.5"></value> <!-- battery warning -->
 		</frame>
 		
 		<!--  -->
