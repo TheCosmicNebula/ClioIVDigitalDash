@@ -221,7 +221,7 @@
 
 			<!-- <value targetId="272" bitstart="8" bitcount="2" units="bit"></value> airbag light -->
 			<value name="x98_rs: Speed Unit" bitstart="13" bitcount="1" enum="1:kmh,0:mph"></value> <!-- speed unit -->
-			<value name="x98_rs: Passenger Airbag Light" bitstart="16" bitcount="2"></value> <!-- passenger airbag light -->
+			<value name="x98_rs: Passenger Airbag Light" bitstart="17" bitcount="1"></value> <!-- passenger airbag light -->
 		</frame>
 		
 		<!--  -->
