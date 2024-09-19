@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- RealDash CAN XML description file, version 2 Requires RealDash version 1.5.8 or newer -->
+<RealDashCAN version="2">
+  <frames>
+  
+	<!-- ID = 0x0C6 -->
+	<frame id="0x0C6">
+		<value name="WheelAngle" offset="0" length="2" conversion="(32768-B0*256-B1)/10"></value> <!-- WheelAngle -->
+	</frame>
+	
+	<!-- PRM & Gas ID186 -->
+    <frame id="0x186">
+		<value targetId="37" units="RPM" offset="0" length="2" endianess="big" conversion="v/8"></value>
+		<value targetId="42" units="%" offset="5" length="1" conversion="V"></value>
+	</frame>
+	
+	<!-- Button !!!!! -->
+	<frame id="0x191">	 
+		<value targetId="95"  offset="0" length="1" conversion="V"></value> <!-- Button 1 Value ++ 1 00 .. 03 -->
+		<value targetId="94"  offset="1" length="1" conversion="V"></value> <!-- Button 2 Value ++ 1 00 .. 03  -->
+		<value name="OilpresU" offset="3" length="1" conversion="v"></value> <!-- for xRay car only -->
+		<value name="BrakesLH" offset="2" length="1" conversion="v"></value> <!-- Brakes leak -->
+		<value name="FrontFogLightU" offset="4" length="1" conversion="v"></value> <!-- add input -->
+		<value name="GasBenzU" offset="5" length="1" conversion="v"></value> <!-- add input -->
+		<value name="WaterLevelU" offset="6" length="1" conversion="v"></value> <!-- add input -->
+		<value targetId="86"  offset="0" length="1" conversion="ID95+ID94"></value> 
+		<value name="Button 1" offset="0" length="1" conversion="V"></value>
+		<value name="Button 2" offset="1" length="1" conversion="V"></value>
+		<value name="ACC" offset="7" length="1" conversion="V"></value>	
+	</frame>
+	 
+	<!-- Speed -->
+    <frame id="0x217">
+		<value targetId="64" units="kmh" offset="3" length="3" endianess="big" conversion="v/39500"></value>
+		<value name="SpeedMCU" units="kmh" offset="3" length="3" endianess="big" conversion="v/39500"></value>
+	</frame>
+ 
+	<!-- ID3F7 Transmission -->
+    <frame id="0x3F7">
+		<value name="GearWheel" startbit="2" bitcount="1"></value>
+		<value name="GearWheelBlink" startbit="1" bitcount="1"></value>
+		<value name="BrakePedal" startbit="12" bitcount="1"></value> 
+		<value name="GearMode" offset="0" length="1" enum="08:P,24:N,32:D,16:R,128:1,136:2,144:3,152:4,160:5,168:6,192:1,200:2,208:3,216:4,224:5,#:err"></value> <!-- Gear  -->
+	</frame>
+	
+    <!-- Oil & Bat ID41A -->
+    <frame id="0x41a">
+		<value targetId="12" units="on" startbit="8" bitcount="1"></value>
+		<value targetId="151" units="on" startbit="23" bitcount="1" ></value>
+		<value name="Oil lamp" units="on" startbit="23" bitcount="1" ></value>
+	</frame>
+	
+	<!--  ID4A2 Glonass -->
+	<frame id="0x4A2">	 
+		<value targetId="22" offset="0" length="4" endianess="big" conversion="v/600000"></value> <!-- latitude -->
+		<value targetId="23" offset="4" length="4" endianess="big" conversion="v/600000"></value> <!-- Longitude -->
+		<value targetId="280" offset="0" length="1" conversion="85"></value> <!-- Zoom 85% -->
+	</frame>
+	
+	 <!--  ID4F8 -->
+	<frame id="0x4F8">	 
+		<value targetId="164" startbit="2" bitcount="1"></value> <!-- Parking Brake -->
+	</frame>
+	
+    <frame id="0x5DA">
+		<value targetId="14" units="C" offset="0" length="1" conversion="V-40"></value>
+    </frame>
+	
+	
+	<!-- 5DE -->
+	<frame id="0x5DE">
+		<value targetId="160"  startbit="5" bitcount="1"></value> <!-- Left turn signal -->
+		<value targetId="161"  startbit="6" bitcount="1"></value> <!-- Right turn signal -->
+		<value name="Alarm" conversion="ID160*ID161"></value>
+		<value targetId="604" startbit="20" bitcount="1"></value>
+		<value name="FTF" startbit="4" bitcount="1"></value>
+		<value name="BTF" startbit="3" bitcount="1"></value>
+		<value name="BackDoor" conversion="ID604"></value>
+		<value targetId="600"  startbit="22" bitcount="1"></value>
+		<value name="Kapot" conversion="ID600"></value> 
+		<value targetId="601"  startbit="60" bitcount="1"></value>
+		<value name="BagDoor" conversion="ID601"></value>
+		<value targetId="163" startbit="60" bitcount="1"></value> <!-- BODY ELECTRONICS Trunk Ajar  -->
+		<value name="NearLight"  startbit="1" bitcount="1"></value>
+		<value targetId="156" startbit="0" bitcount="1"></value> <!-- Low Beam -->
+		<value targetId="602" startbit="11" bitcount="1"></value>
+		<value name="LeftDoor" conversion="ID602"></value>
+		<value targetId="603" startbit="9" bitcount="1"></value>
+		<value name="RightDoor" conversion="ID603"></value>
+		<value targetId="157" startbit="0" bitcount="1"></value> <!-- High beam -->
+		<value name="CarShow" conversion="ID600||ID601||ID602||ID603||ID604"></value>
+		<value targetId="162" conversion="ID602||ID603||ID604"></value> <!-- BODY ELECTRONICS Door Ajar  -->
+		<value name="CarShow2" conversion="ID600||ID601||ID602||ID603||ID604*ID64"></value>
+		<value name="PositionLight" startbit="2" bitcount="1"></value>
+		<value targetId="155" startbit="2" bitcount="1"></value> <!-- BODY ELECTRONICS Parking Lights  -->
+    </frame>
+    
+    <!-- 3rd CAN frame contains Fuel level analog inputs ID6FB -->
+    <frame id="0x6FB">
+		<value targetId="170" units="%" offset="3" length="1" conversion="V/1.1"></value>
+		<value targetId="96" units="L" offset="3" length="1" conversion="V/2"></value> <!-- Dummy 04 Internal ID for transferring outputs to a frame 0xFFFF -->
+		<value name="FuelLittre" units="L" offset="3" length="1" conversion="ID96"></value>
+		<value name="FuelRange" units="Km" offset="1" length="2" endianess="big"></value>
+    </frame>	   
+	
+	<!-- Check CC SL SetSpeed FuelConsuption -->
+    <frame id="0x66a">
+		<value targetId="65" startbit="3" bitcount="1" ></value> <!-- Check Enqige -->
+		<value targetId="610" startbit="0" bitcount="1" ></value> <!-- 0 bit -->
+		<value targetId="611" startbit="1" bitcount="1" ></value> <!-- 1 bit -->
+		<value targetId="612" startbit="2" bitcount="1" ></value> <!-- 2 bit -->
+		<value name="CruiseControlGreen" conversion="ID612-ID610"></value>
+		<value name="CruiseControlYellow" conversion="ID612*ID610"></value>
+		<value name="SpeedLimitGreen" conversion="(ID610-ID611)-ID612"></value>
+		<value name="SpeedLimitYellow" conversion="(ID611-ID610)-ID612"></value>
+		<value name="FuelConsuptionCan" offset="3" lengt="1" conversion="v/10"></value>
+		<value targetId="301" offset="1" length="1"></value> <!-- SetSpeed -->
+	</frame>
+	
+	<!-- InstantFuelConsuption TripMCU AverageSpendFuelMCU MCU_Range -->
+    <frame id="0xFFFF">
+		<value name="IntantFuelConsuptionCan" units="L/100км" offset="0" length="1" conversion="v/0.077/(ID64+0.1)"></value>	
+		<value name="IntantFuelConsuptionCanHour" units="L/H" offset="0" length="1" conversion="v/7.77"></value>	
+		<value targetId="97" units="Km" offset="5" length="3" conversion="v/1600"></value> <!-- Dummy 05 Внутрениий ID для переноса выислений во фрейм 0xFFFF -->
+		<value name="SpentFuelMCU" units="L" conversion="ID97"></value>
+		<value targetId="123" offset="1" length="4" endianess="big" conversion="v/10400"></value> <!-- Потраченное топливо в литрах Dummy 08 Внутрениий ID для переноса выислений во фрейм 0xFFFF -->
+		<value targetId="121" units="Km" conversion="ID122-ID97"></value> <!-- Пробег по MCU Dummy 06 Внутрениий ID для переноса выислений во фрейм 0xFFFF -->
+		<value name="TripMCU" units="Km" conversion="ID121"></value>
+		<value targetId="124" conversion="ID123/ID121*100"></value> <!-- Dummy 09 Расход топлива L/100км за земеряемый пробег -->
+		<value name="RangeMCU" units="Km" conversion="ID96/ID124*100"></value> <!-- Расситываемый пробег от остатка топлива -->	
+	</frame>
+	
+		<!-- Odometre -->
+    <frame id="0x5D7">
+		<value targetId="299" units="Km" offset="2" length="4" endianess="big" conversion="v/1600"></value>
+		<value targetId="122" units="Km" offset="3" length="3" endianess="big" conversion="v/1600"></value> <!-- Dummy 07 Internal ID for transferring outputs to a frame 0xFFFF -->
+		<value name="TripMCU3" units="Km" offset="3" length="3" endianess="big" conversion="v/1600"></value> <!-- test -->
+	</frame>
+	
+	 <!-- Ambient Temperature-->
+    <frame id="0x3B7">
+		<value name="OutTemperature" units="C" offset="0" length="1" conversion="V-40"></value> <!-- (V-40)/1.1+3 -->
+    </frame>
+
+	<!-- ID653 -->
+    <frame id="0x653">
+		<value name="BeltLeft" startbit="14" bitcount="2" ></value>
+		<value name="BeltRight" startbit="12" bitcount="2" ></value>
+		<value name="AirBag" startbit="10" bitcount="1" ></value>
+	</frame>
+   	
+	<!-- ID4AC Voltage -->
+    <frame id="0x4AC">
+		<value name="Voltage" units="V" offset="1" length="1" conversion="v/10 + (14.6727 - v/10) / 2.5454"  ></value>
+	</frame>
+	
+	<!-- ID655 Transmission Modes -->
+    <frame id="0x655">
+		<value name="TransmissionMode" offset="0" length="1" enum="0:AUTO,32:FULL,64:FRONT,#:err"></value> <!-- Mode -->
+	</frame>		
+	
+	<!-- Steering wheel in good working order -->
+    <frame id="0x62C">
+		<value name="SteeringWheel" startbit="0" bitcount="1" ></value>
+	</frame>
+		
+	<!-- ABS ESP  -->
+    <frame id="0x666">
+		<value name="ABS_Bkakes" startbit="1" bitcount="1"></value>
+		<value name="ESP_OFF" startbit="2" bitcount="1"></value>
+		<value name="ABS" startbit="3" bitcount="1"></value>
+		
+		<value name="Skidding" startbit="6" bitcount="1"></value>
+		<value name="Skidding_Blink" startbit="7" bitcount="1"></value>
+		<value name="ABS_Blink" startbit="8" bitcount="1"></value>
+		<value name="ABS_Fast_Blink" startbit="8" bitcount="1"></value>
+		<value name="Air_leak" startbit="26" bitcount="1"></value>
+	</frame>
+	
+	<!-- AverageFuelConsumption & SpentFuel -->
+    <frame id="0x646">
+		<value name="AverageFuelConsumption" units="L/100км" offset="1" length="1" conversion="v/10"></value>
+		<value name="SpentFuel" units="L" offset="4" length="2" endianess="big"></value>
+	</frame>
+	
+	<!-- ID = 0x350 Key --> 
+	<frame id="0x350"> 
+		<value targetId="167" startbit="0" bitcount="3" conversion="v/7"></value> <!-- Key -->
+		<value name="BrakePedalPosition" offset="5" startbit="6" bitcount="1" ></value>	
+	</frame>
+	
+	<frame id="0x55D">
+		<value name="ClutchPedal" offset="2" startbit="5" bitcount="1"></value> <!-- Педаль сцепления -->
+		<value targetId="159" offset="1" startbit="5" bitcount="1"></value> <!-- Reverse Lights -->
+	</frame>
+  </frames>
+</RealDashCAN>
+

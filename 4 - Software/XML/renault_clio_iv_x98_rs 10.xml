@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- RealDash CAN XML description file, version 2 Requires RealDash version 1.5.8 or newer -->
+<!-- RENAULT Clio IV 200 EDC (x98)-->
+<RealDashCAN version="2">
+	<frames>
+		<!--  -->
+		<frame id="0x090" size="4">
+			
+		</frame>
+		
+		<!--  -->
+		<frame id="0x0c6" size="4">
+			<value name="x98_rs: Wheel Angle" offset="0" length="2" conversion="(32768-B0*256-B1)/10"></value> <!-- steering wheel angle [deg] -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x12e">
+			
+		</frame>
+				
+		<!-- wheel torque -->
+		<frame id="0x17a">
+			<value name="x98_rs: Wheel Torque Requested" offset="0" length="2" conversion="(V-12800)*0.1"></value> <!-- wheel torque requested [nm] -->
+			<value name="x98_rs: Wheel Torque" offset="6" length="2" conversion="(V-12800)*0.1"></value> <!-- wheel torque [nm] -->
+		</frame>
+
+		<frame id="0x17c">
+			<!-- TBC -->
+		</frame>
+
+		<frame id="0x17e">
+			<!-- TBC -->
+		</frame>
+
+		<!-- rpm & throttle -->
+		<frame id="0x186" size="7">
+			<value targetId="37" offset="0" length="2" conversion="V*0.125" endianness="big"></value> <!-- engine rpm -->
+			
+			<value name="x98_rs: Actual Torque" bitstart="16" bitcount="12" conversion="(V-800)/2"></value> <!-- actual torque [nm] -->
+			<value name="x98_rs: Requested Torque" bitstart="28" bitcount="12" conversion="(V-800)/2"></value> <!-- requested torque [nm] -->
+
+			<value targetId="42" offset="5" length="1" conversion="V"></value> <!-- throttle position [%] -->
+		</frame>
+	
+		<!--  -->
+		<frame id="0x189">
+			<!-- TBC -->
+		</frame>
+	
+		<!--  -->
+		<frame id="0x18a">
+			<value name="x98_rs: Cruise Control Throttle Position" bitstart="16" bitcount="10" conversion="V*0.8"></value> <!-- cruise control throttle position -->
+		</frame>
+	
+		<!--  -->
+		<frame id="0x1a0" size="1">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x1bb">
+			<!-- TBC -->
+		</frame>
+	
+		<!--  -->
+		<frame id="0x1bd">
+			<!-- TBC -->
+		</frame>
+	
+		<!--  -->
+		<frame id="0x1f6">
+			<value targetId="56" bitstart="10" bitcount="2" conversion="V>>1" units="bit"></value> <!-- engine running -->
+
+			<value name="x98_rs: AC Pressure" bitstart="23" bitcount="9" conversion="V/10" units="bar"></value> <!-- ac pressure (bar) -->
+		</frame>
+	
+		<!--  -->
+		<frame id="0x20c">
+			<!-- TBC -->
+		</frame>
+	
+		<!--  -->
+		<frame id="0x211">
+			<!-- TBC -->
+		</frame>
+		
+		<!--  -->
+		<frame id="0x214" size="2">
+			<!-- TBC -->
+		</frame>
+	
+		<!-- speed -->
+		<frame id="0x217">
+			<value targetId="64" units="kmh" offset="3" length="3" endianess="big" conversion="v/39500"></value> <!-- speed [KM]-->
+		</frame>
+	
+		<!--  -->
+		<frame id="0x218">
+			<!-- TBC -->
+		</frame>
+		
+		<!--  -->
+		<frame id="0x242">
+			<!-- TBC -->
+		</frame>
+
+		<!-- front wheels rotation info -->
+		<frame id="0x29a">
+			<value name="x98_rs: Front Right Wheel RPM" offset="0" length="2" conversion="V/24"></value> <!-- front right wheel rpm -->
+			<value name="x98_rs: Front Left Wheel RPM" offset="1" length="2" conversion="V/24"></value> <!-- front left wheel rpm -->
+			<value name="x98_rs: Average Front Wheel RPM" offset="2" length="2" conversion="V/100"></value> <!-- average front wheel rpm -->
+		</frame>
+		
+		<!-- rear wheels rotation info -->
+		<frame id="0x29c">
+			<value name="x98_rs: Rear Right Wheel RPM" offset="0" length="2" conversion="V/24"></value> <!-- rear right wheel rpm -->
+			<value name="x98_rs: Rear Left Wheel RPM" offset="1" length="2" conversion="V/24"></value> <!-- rear left wheel rpm -->
+		</frame>
+		
+		<!--  -->
+		<frame id="0x2b7" size="5">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x2c6" size="6">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x303" size="7">
+			<!-- TBC -->
+		</frame>
+
+		<!-- Key --> 
+		<frame id="0x350"> 
+			
+		</frame>
+		
+		<!--  -->
+		<frame id="0x352" size="4">
+			<value name="x98_rs: Braking Pressure" offset="2" length="2" conversion="V*0.5" units="bar"></value> <!-- braking pressure [BAR] -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x354" size="6">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x356" size="6">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x392" size="5">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x3b7">
+			<value targetId="274" offset="1" length="1" conversion="V*0.4"></value> <!-- dimmer switch -->
+		</frame>
+	
+		<frame id="0x3f7" size="3"> <!-- automatic transmission: shifter -->
+			<value name="x98_rs: Shift Mode" bitstart="0" bitcount="2" enum="0:A,2:M,3:A,#:E"></value> <!-- shift mode -->
+			<value name="x98_rs: Shift Mode Full" bitstart="0" bitcount="2" enum="0:Automatic,2:Manual,3:Automatic,#:Error"></value> <!-- shift mode full -->
+
+			<value name="139" bitstart="3" bitcount="3" conversion="V+1"></value> <!-- current gear -->
+			<value name="x98_rs: Shifter Position" bitstart="3" bitcount="3" conversion="V/8" enum="1:P,2:R,3:N,#:D"></value> <!-- shifter position -->
+			<value name="x98_rs: Shifter Position Full" bitstart="3" bitcount="3" conversion="V/8" enum="1:Park,2:Reverse,3:Neutral,#:Drive"></value> <!-- shifter position full -->
+
+			<value id="162" bitstart="10" bitcount="1" units="bit"></value> <!-- door ajar -->
+			<value name="x98_rs: Press Brake Pedal" bitstart="11" bitcount="1" units="bit"></value> <!-- press brake pedal -->
+		</frame>
+	
+		<!--  -->
+		<frame id="0x3f9" size="1">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x3fa" size="2">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x401">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x405">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x433" size="7">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x45c" size="4">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x4a4" size="7">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x4ac" size="1">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x4f8">
+			<value targetId="164" bitstart="4" bitcount="2" units="bit"></value> <!-- parking brake -->
+
+			<!-- <value targetId="272" bitstart="8" bitcount="2" units="bit"></value> airbag light -->
+			<value name="x98_rs: Speed Unit" bitstart="13" bitcount="1" enum="0:kmh,1:mph,#:kmh"></value> <!-- speed unit -->
+			<value name="x98_rs: Passenger Airbag Light" bitstart="16" bitcount="2" units="bit"></value> <!-- passenger airbag light -->
+		</frame>
+		
+		<!--  -->
+		<frame id="0x4fa" size="2">
+			<!-- TBC -->
+		</frame>
+
+		<!-- battery voltage -->
+		<frame id="0x4ac">
+			<value targetId="12" offset="1" length="1" conversion="v/10 + (14.6727 - v/10) / 2.5454"></value> <!-- battery voltage [V] -->
+			
+			<value name="x98_rs: Battery Warning" conversion="ID12 &lt; 11.5"></value> <!-- battery warning -->
+		</frame>
+		
+		<!--  -->
+		<frame id="0x552" size="2">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x55d">
+			<value name="x98_rs: Vehicle Locked" offset="7" length="1" units="bit"></value> <!-- vehicle locked -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x5d7" size="7">
+			<!-- <value id="64" offset="0" length="2" conversion="V*0.01"></value> speed -->
+
+			<value id="310" bitstart="16" bitcount="28" converson="V*0.01"></value> <!-- odometer [KM]-->
+		</frame>
+
+		<!--  -->
+		<frame id="0x5da">
+			<value id="14" offset="0" length="1" conversion="V/40" units="C"></value> <!-- coolant temperature [C] -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x5de">
+			<value id="158" bitstart="3" length="1" units="bit"></value> <!-- rear fog -->
+			<value id="160" bitstart="2" length="1" units="bit"></value> <!-- left turn signal -->
+			<value id="161" bitstart="1" length="1" units="bit"></value> <!-- right turn signal -->
+
+			<value id="155" bitstart="5" bitcount="1" units="bit"></value> <!-- parking lights -->
+			<value id="156" bitstart="6" bitcount="1" units="bit"></value> <!-- low beam -->
+			<value id="157" bitstart="7" bitcount="1" units="bit"></value> <!-- high beam -->
+			<value id="392" bitstart="4" bitcount="1" units="bit"></value> <!-- front fog -->
+
+			<value id="481" bitstart="11" bitcount="2" conversion="V>>1" units="bit"></value> <!-- front left door open / door 1 open-->
+			<value id="482" bitstart="13" bitcount="2" conversion="V>>1" units="bit"></value> <!-- front right door open / door 2 open-->
+			<value id="483" bitstart="16" bitcount="2" conversion="V>>1" units="bit"></value> <!-- rear left door open / door 3 open-->
+			<value id="484" bitstart="18" bitcount="2" conversion="V>>1" units="bit"></value> <!-- rear left door open / door 4 open-->
+
+			<value name="x98_rs: Unlock Steering Warning" bitstart="23" bitcount="1" units="bit"></value> <!-- unlock steering message -->
+			<value name="x98_rs: Auto Lock ON" bitstart="24" bitcount="1" units="bit"></value> <!-- auto lock on -->
+
+			<value name="x98_rs: Rear Wiper ON" bitstart="56" bitcount="2" conversion="V>>1" units="bit"></value> <!-- rear wiper -->
+			<value targetId="485" bitstart="58" bitcount="2" conversion="V>>1" units="bit"></value> <!-- boot open / door 5 open -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x5df" size="2">
+			<value name="x98_rs: Rear Windows Active" bitstart="10" bitcount="1" units="bit" conversion="1-V"></value> <!-- rear windows active -->
+			<value name="x98_rs: Rear Window Lock" bitstart="11" bitcount="1" units="bit"></value> <!-- rear window lock -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x62c" size="1">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x634" size="3">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x646">
+			<!-- TBC -->
+		</frame>
+
+		<!--  -->
+		<frame id="0x648">
+			<!-- TBC -->
+		</frame>
+
+		<!-- more testing required -->
+		<frame id="0x653" size="4">
+			<value targetId="272" startbit="10" bitcount="1" units="bit" conversion="1-V"></value> <!-- airbag light -->
+			<value name="x98_rs: Check Airbag" conversion="ID272"></value> <!-- check airbag message -->
+			
+			<!-- <value name="x98_rs: Driver Belt" startbit="12" bitcount="2"></value> driver seat belt -->
+			<!-- <value name="x98_rs: Passenger Belt" startbit="14" bitcount="2"></value> passenger seat belt -->
+			
+			<!-- <value name="x98_rs: Passenger Airbag Off" bitstart="12" bitcount="1" units="bit"></value> passenger airbag off -->
+		</frame>
+
+		<!-- abs module  -->
+		<frame id="0x666" size="4">
+			<value name="x98_rs: ABS ABS_Brakes" startbit="1" bitcount="1"></value>
+			<value name="x98_rs: ABS ESP_OFF" startbit="2" bitcount="1"></value> <!-- esp off -->
+			<value name="x98_rs: ABS ON" startbit="3" bitcount="1"></value> <!-- abs on -->
+			
+			<value name="x98_rs: ABS Skidding" startbit="6" bitcount="1"></value> <!-- loss of traction warning -->
+			<value name="x98_rs: ABS Skidding Blink" startbit="7" bitcount="1"></value>
+			<value name="x98_rs: ABS ABS Blink" startbit="8" bitcount="1"></value>
+			<value name="x98_rs: ABS ABS Fast Blink" startbit="8" bitcount="1"></value>
+			
+			<value name="x98_rs: Air leak" startbit="26" bitcount="1"></value>
+		</frame>
+		
+		<!-- cruise control / driving modes -->
+		<frame id="0x66a"> <!-- driving modes -->
+			<value name="x98_rs: Cruise Control Idle" bitstart="5" bitcount="3" conversion="V=1"></value>
+			<value name="x98_rs: Cruise Control Active" bitstart="5" bitcount="3" conversion="V=2"></value>
+			<value name="x98_rs: Speed Limiter Idle" bitstart="5" bitcount="3" conversion="V=5"></value>
+			<value name="x98_rs: Speed Limiter Active" bitstart="5" bitcount="3" conversion="V=6"></value>
+			<value targetId="65" startbit="3" bitcount="1"></value> <!-- Check Enqige -->
+			
+			<value id="171" offset="1" length="1" conversion="V*1.609"></value> <!-- cc / sl set speed -->
+
+			<value name="x98_rs: Driving Mode" offset="7" length="1" enum="2:N,4:S,6:R,#:N"></value> <!-- driving mode -->
+			<value name="x98_rs: Driving Mode Full" offset="7" length="1" enum="2:Normal,4:Sport,6:Race,#:Normal"></value> <!-- driving mode -->
+		</frame>
+
+		<!-- climate control -->
+		<frame id="0x699"> <!-- climate controls -->
+			<value name="x98_rs: Rear Window Defrost" offset="0" length="1" conversion="1-(((V-24)*1)/16)"></value> <!-- rear defrost -->
+			<value targetId="175" offset="1" length="1" conversion="V*0.5" units="C"></value> <!-- ac set temperature -->
+
+			<value name="x98_rs: AC Fan Speed" offset="3" length="1" enum="248:0,16:1,32:2,48:3,64:4,80:5,96:6,112:7,128:8,#:err"></value> <!-- ac fan speed -->
+		</frame>
+		
+		<!-- can fuel information -->
+		<frame id="6fb">
+			<value targetId="170" units="%" offset="3" length="1" conversion="V/1.1"></value> <!-- fuel level % -->
+		</frame>
+		
+	</frames>
+</RealDashCAN>

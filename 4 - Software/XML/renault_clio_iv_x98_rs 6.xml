@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- RealDash CAN XML description file, version 2 Requires RealDash version 1.5.8 or newer -->
+<RealDashCAN version="2">
+
+	<frames>
+	
+		<frame id="0x0c6">
+			<value targetId="229" offset="0" length="2" conversion="(V*0.00549324788281071)-180.0576791"></value> <!-- steering wheel angle -->
+		</frame>
+
+		<frame id="0x186">
+			<value targetId="37" offset="0" length="2" conversion="V*0.125"></value> <!-- engine rpm -->
+
+			<value targetId="42" bitstart="40" length="10" conversion="V*0.8"></value> <!-- throttle position -->
+		</frame>
+	
+		<frame id="0x18a">
+			<value targetId="x98_rs: Cruise Control Throttle Position" bitstart="16" bitcount="10" conversion="V*0.8"></value> <!-- cruise control throttle position -->
+		</frame>
+	
+		<frame id="0x1f6">
+			<value targetId="56" bitstart="10" bitcount="2" conversion="V>>1" units="bit"></value> <!-- engine running -->
+		</frame>
+	
+		<frame id="0x29a">
+
+		</frame>
+	
+		<frame id="0x352">
+			<value name="x98_rs: Braking Pressure" offset="2" length="2" conversion="V*0.5" units="bar"></value> <!-- braking pressure -->
+		</frame>
+
+		<frame id="0x3b7">
+			<value targetId="274" offset="1" length="1" conversion="V*0.4"></value> <!-- dimmer switch -->
+		</frame>
+	
+		<frame id="0x3f7"> <!-- automatic transmission: shifter -->
+			<value name="139" bitstart="3" bitcount="3" conversion="V+1"></value> <!-- current gear -->
+			<value name="x98_rs: Shifter Position" bitstart="3" bitcount="3" conversion="V/8" enum="1:P,2:R,3:N,#:D"></value> <!-- shifter position -->
+			<value name="x98_rs: Shift Mode" bitstart="0" bitcount="2" enum="2:M,6:A,#:E"></value> <!-- shift mode -->
+
+			<value id="162" bitstart="10" bitcount="1" units="bit"></value> <!-- door ajar -->
+			<value name="x98_rs: Press Brake Pedal" bitstart="11" bitcount="1" units="bit"></value> <!-- press brake pedal -->
+		</frame>
+	
+		<frame id="0x4f8">
+			<value targetId="164" bitstart="4" bitcount="2" units="bit"></value> <!-- parking brake -->
+
+			<value targetId="272" bitstart="8" bitcount="2" units="bit"></value> <!-- airbag light -->
+			<value targetId="x98_rs: Speed Unit" bitstart="13" bitcount="1" enum="0:km/h,1:mph,#:km/h"></value> <!-- speed unit -->
+			<value targetId="x98_rs: Passenger Airbag Light" bitstart="16" bitcount="2" units="bit"></value> <!-- passenger airbag light -->
+		</frame>
+	
+		<frame id="0x55d">
+			<value name="x98_rs: Vehicle Locked" offset="7" length="1" units="bit"></value> <!-- vehicle locked -->
+		</frame>
+
+		<frame id="0x5d7">
+			<value id="64" offset="0" length="2" conversion="V*0.01"></value> <!-- speed -->
+
+			<value id="310" bitstart="16" bitcount="28" converson="V*0.01"></value> <!-- odometer -->
+		</frame>
+
+		<frame id="0x5de">
+			<value id="155" bitstart="5" bitcount="1" units="bit"></value> <!-- parking lights -->
+			<value id="156" bitstart="6" bitcount="1" units="bit"></value> <!-- low beam -->
+			<value id="157" bitstart="7" bitcount="1" units="bit"></value> <!-- high beam -->
+			<value id="392" bitstart="4" bitcount="1" units="bit"></value> <!-- front fog -->
+
+			<value id="158" bitstart="3" length="1" units="bit"></value> <!-- rear fog -->
+			<value id="160" bitstart="2" length="1" units="bit"></value> <!-- left turn signal -->
+			<value id="161" bitstart="1" length="1" units="bit"></value> <!-- right turn signal -->
+
+			<value id="481" bitstart="11" bitcount="2" conversion="V>>1" units="bit"></value> <!-- front left door open / door 1 open-->
+			<value id="482" bitstart="13" bitcount="2" conversion="V>>1" units="bit"></value> <!-- front right door open / door 2 open-->
+			<value id="483" bitstart="16" bitcount="2" conversion="V>>1" units="bit"></value> <!-- rear left door open / door 3 open-->
+			<value id="484" bitstart="18" bitcount="2" conversion="V>>1" units="bit"></value> <!-- rear left door open / door 4 open-->
+
+			<value name="x98_rs: Unlock Steering Warning" bitstart="23" bitcount="1" units="bit"></value> <!-- unlock steering warning -->
+			<value name="x98_rs: Auto Lock ON" bitstart="24" bitcount="1" units="bit"></value> <!-- auto lock on -->
+
+			<value name="x98_rs: Rear Wiper ON" bitstart="56" bitcount="2" conversion="V>>1" units="bit"></value> <!-- rear wiper -->
+			<value name="485" bitstart="58" bitcount="2" conversion="V>>1" units="bit"></value> <!-- boot open / door 5 open -->
+		</frame>
+
+		<frame id="0x5df">
+			<value name="x98_rs: Rear Windows Active" bitstart="10" bitcount="1" units="bit" conversion="1-V"></value> <!-- rear windows active -->
+			<value name="x98_rs: Rear Window Lock" bitstart="11" bitcount="1" units="bit"></value> <!-- rear window lock -->
+		</frame>
+
+		<frame id="0x653">
+			<!-- <value name="x98_rs: Passenger Airbag Off" bitstart="12" bitcount="1" units="bit"></value> passenger airbag off -->
+		</frame>
+
+		<frame id="0x66a"> <!-- driving modes -->
+			<value name="x98_rs: Cruise Control" offset="0" length="1" enum="32:OFF,33:Speed Limiter Idle,34:Speed Limiter Active,37:Cruise Control Idle,38:Cruise Control Active"></value> <!-- cc / sl active -->
+			<value id="171" offset="1" length="1" conversion="V*1.609"></value> <!-- cc / sl set speed -->
+
+			<value name="x98_rs: Driving Mode" offset="7" length="1" enum="2:Normal,4:Sport,6:Race,#:Normal"></value> <!-- driving mode -->
+		</frame>
+
+		<frame id="0x699"> <!-- climate controls -->
+			<value name="x98_rs: Rear Window Defrost" offset="0" length="1" conversion="1-(((V-24)*1)/16)"></value> <!-- rear defrost -->
+			<value targetId="175" units="C" offset="1" length="1" conversion="V*0.5"></value> <!-- ac set temperature -->
+
+			<value name="x98_rs: AC Fan Speed" offset="3" length="1" enum="248:0,16:1,32:2,48:3,64:4,80:5,96:6,112:7,128:8,#:err"></value> <!-- ac fan speed -->
+		</frame>
+	</frames>
+
+</RealDashCAN>
