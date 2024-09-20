@@ -71,7 +71,7 @@
 		<frame id="0x1f6">
 			<value targetId="56" bitstart="10" bitcount="1"></value> <!-- engine running -->
 
-			<value name="x98_rs: AC Pressure" bitstart="23" bitcount="9" conversion="V/10" units="bar"></value> <!-- ac pressure (bar) -->
+			<value name="x98_rs: AC Pressure" bitstart="23" bitcount="9" conversion="V/10" units="bar"></value> <!-- ac pressure [bar] -->
 		</frame>
 	
 		<!--  -->
@@ -91,7 +91,7 @@
 	
 		<!-- speed -->
 		<frame id="0x217">
-			<value targetId="64" units="kmh" offset="3" length="3" endianess="big" conversion="v/39500"></value> <!-- speed [KM]-->
+			<value targetId="64" units="kmh" offset="3" length="3" endianess="big" conversion="v/39500"></value> <!-- speed [km/h]-->
 		</frame>
 	
 		<!--  -->
@@ -139,7 +139,7 @@
 		
 		<!--  -->
 		<frame id="0x352" size="4">
-			<value name="x98_rs: Braking Pressure" offset="2" length="2" conversion="V*0.5" units="bar"></value> <!-- braking pressure [BAR] -->
+			<value name="x98_rs: Braking Pressure" offset="2" length="2" conversion="V*0.5" units="bar"></value> <!-- braking pressure [bar] -->
 		</frame>
 
 		<!--  -->
@@ -231,7 +231,7 @@
 
 		<!-- battery voltage -->
 		<frame id="0x4ac">
-			<value targetId="12" offset="0" length="1" conversion="v/10+(14.6727-v/10)/2.5454"></value> <!-- battery voltage [V] -->
+			<value targetId="12" offset="0" length="1" conversion="v/10+(14.6727-v/10)/2.5454"></value> <!-- battery voltage [v] -->
 			
 			<value name="x98_rs: Battery Warning" conversion="ID12&lt;11.5"></value> <!-- battery warning -->
 		</frame>
@@ -248,12 +248,12 @@
 
 		<!--  -->
 		<frame id="0x5d7" size="7">
-			<value targetId="310" bitstart="16" bitcount="28" converson="(V>>4)*0.01"></value> <!-- odometer [KM]-->
+			<value targetId="310" bitstart="16" bitcount="28" converson="(V>>4)*0.01"></value> <!-- odometer [km]-->
 		</frame>
 
 		<!--  -->
 		<frame id="0x5da">
-			<value targetId="14" offset="0" length="1" conversion="V-40" units="C"></value> <!-- coolant temperature [C] -->
+			<value targetId="14" offset="0" length="1" conversion="V-40" units="C"></value> <!-- coolant temperature [c] -->
 		</frame>
 
 		<!-- vehicle status lights, doors etc -->
