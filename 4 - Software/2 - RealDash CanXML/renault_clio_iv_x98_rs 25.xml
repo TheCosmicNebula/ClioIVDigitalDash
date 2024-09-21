@@ -36,8 +36,8 @@
 		<frame id="0x186" size="7">
 			<value targetId="37" offset="0" length="2" conversion="V*0.125" endianness="big"></value> <!-- engine rpm -->
 			
-			<value name="x98_rs: Actual Torque" startbit="16" bitcount="12" conversion="(V-800)/2"></value> <!-- actual torque [nm] -->
-			<value name="x98_rs: Requested Torque" startbit="28" bitcount="12" conversion="(V-800)/2"></value> <!-- requested torque [nm] -->
+			<value name="x98_rs: Actual Torque" offset="3" startbit="4" bitcount="12" conversion="(V-800)/2"></value> <!-- actual torque [nm] -->
+			<value name="x98_rs: Requested Torque" offset="4" startbit="0" bitcount="12" conversion="(V-800)/2"></value> <!-- requested torque [nm] -->
 
 			<value targetId="42" offset="5" length="1" conversion="V"></value> <!-- throttle position [%] -->
 		</frame>
@@ -49,7 +49,7 @@
 	
 		<!--  -->
 		<frame id="0x18a">
-			<value name="x98_rs: Cruise Control Throttle Position" startbit="16" bitcount="10" conversion="V*0.8"></value> <!-- cruise control throttle position -->
+			<value name="x98_rs: Cruise Control Throttle Position" offset="3" startbit="6" bitcount="10" conversion="V*0.8"></value> <!-- cruise control throttle position -->
 		</frame>
 	
 		<!--  -->
@@ -173,7 +173,7 @@
 			<value name="x98_rs: Shifter Position" startbit="3" bitcount="3" conversion="V/8" enum="1:P,2:R,3:N,#:D"></value> <!-- shifter position -->
 			<value name="x98_rs: Shifter Position Full" startbit="3" bitcount="3" conversion="V/8" enum="1:Park,2:Reverse,3:Neutral,#:Drive"></value> <!-- shifter position full -->
 
-			<value name="x98_rs: Press Brake Pedal" offset="1" startbit="4" bitcount="1"></value> <!-- press brake pedal -->
+			<value name="x98_rs: Press Brake Pedal" offset="1" startbit="4" bitcount="1" units="bit"></value> <!-- press brake pedal -->
 		</frame>
 	
 		<!--  -->
