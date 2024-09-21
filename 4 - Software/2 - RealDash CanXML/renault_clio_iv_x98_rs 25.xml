@@ -139,7 +139,7 @@
 		
 		<!--  -->
 		<frame id="0x352" size="4">
-			<value name="x98_rs: Braking Pressure" offset="3" length="1" conversion="V*0.5" units="bar"></value> <!-- braking pressure [bar] -->
+			<value name="x98_rs: Braking Pressure" offset="3" length="1" conversion="V*0.5" units="bar" rangeMin="0" rangeMax="140"></value> <!-- braking pressure [bar] -->
 		</frame>
 
 		<!--  -->
