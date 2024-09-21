@@ -134,7 +134,7 @@
 
 		<!-- Key --> 
 		<frame id="0x350"> 
-			
+			<value name="x98_rs: Brake Pedal Position" offset="5" startbit="6" bitcount="1" ></value>	<!-- brake pedal position -->
 		</frame>
 		
 		<!--  -->
@@ -259,8 +259,8 @@
 
 		<!-- vehicle status lights, doors etc -->
 		<frame id="0x5de">
-			<value targetId="161" startbit="6" endianness="big" bitcount="1"></value> <!-- right turn signal -->
-			<value targetId="160" startbit="5" endianness="big" bitcount="1"></value> <!-- left turn signal -->
+			<value targetId="161" startbit="6" bitcount="1"></value> <!-- right turn signal -->
+			<value targetId="160" startbit="5" bitcount="1"></value> <!-- left turn signal -->
 			<value targetId="158" startbit="4" bitcount="1"></value> <!-- rear fog -->
 			<value targetId="392" startbit="3" bitcount="1"></value> <!-- front fog -->
 			<value targetId="155" startbit="2" bitcount="1"></value> <!-- side lights -->
@@ -334,10 +334,8 @@
 		
 		<!-- cruise control / driving modes -->
 		<frame id="0x66a"> <!-- driving modes -->
-			<value name="x98_rs: Cruise Control Idle" startbit="5" bitcount="3" conversion="V=1"></value>
-			<value name="x98_rs: Cruise Control Active" startbit="5" bitcount="3" conversion="V=2"></value>
-			<value name="x98_rs: Speed Limiter Idle" startbit="5" bitcount="3" conversion="V=5"></value>
-			<value name="x98_rs: Speed Limiter Active" startbit="5" bitcount="3" conversion="V=6"></value>
+			<value name="x98_rs: Cruise Control Status" startbit="1" bitcount="2" conversion="V-1"></value>
+			<value name="x98_rs: Speed Limiter Status" startbit="0" bitcount="2" conversion="V"></value>
 			<value targetId="65" startbit="3" bitcount="1"></value> <!-- check engine -->
 			
 			<value targetId="171" offset="1" length="1" conversion="V*1.609"></value> <!-- cc / sl set speed -->
