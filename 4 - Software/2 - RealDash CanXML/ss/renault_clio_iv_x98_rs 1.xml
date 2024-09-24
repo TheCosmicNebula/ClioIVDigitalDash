@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- RealDash CAN XML description file, version 2 Requires RealDash version 1.5.8 or newer -->
+<RealDashCAN version="2">
+
+	<frames>
+	
+		<frame id="0x090">
+			<value name="x98_rs: Braking Force" offset="0" length="1" conversion="V*0.5" units="Bar"></value> <!-- braking force -->
+		</frame>
+
+		<frame id="0x186">
+			<value targetId="37" offset="0" length="2" conversion="V*0.125"></value> <!-- engine rpm -->
+		</frame>
+	
+		<frame id="0x29a">
+			<value targetId="64" units="km/h" offset="4" length="2" conversion="V*0.01"></value> <!-- vehicle speed -->
+		</frame>
+	
+		<frame id="0x3b7">
+			<value targetId="274" offset="1" length="1" conversion="V*0.4"></value> <!-- dimmer switch -->
+		</frame>
+	
+		<frame id="0x3f7">
+			<value name="x98_rs: Selected Gear" offset="0" length="1" enum="8:P,16:R,24:N,192:1,200:2,208:3,216:4,224:5,232:6,128:M1,136:M2,144:M3,152:M4,160:M5,168:M6,#:E"></value> <!-- current gear -->
+			<value name="x98_rs: Shifter Position" offset="0" length="1" enum="8:P,16:R,24:N,#:D"></value> <!-- shifter position -->
+
+			<value name="x98_rs: Shifter Lock" offset="2" length="1" conversion="V*0.0625"></value> <!-- shifter lock -->
+		</frame>
+	
+		<frame id="0x4f8">
+			<value targetId="164" offset="0" length="1" conversion="(V*0.25)-21"></value> <!-- parking brake -->
+		</frame>
+	
+		<frame id="0x55d">
+			<value name="x98_rs: Vehicle Locked" offset="7" length="1" units="bit"></value> <!-- vehicle locked -->
+		</frame>
+
+		<frame id="0x5de">
+			<value id="162" offset="1" length="1" conversion="V>1"></value> <!-- door ajar -->
+		</frame>
+
+		<frame id="0x5df">
+			<value name="x98_rs: Rear Window Lock" offset="1" length="1" conversion="1-((V*0.0625)-9.25)"></value> <!-- rear window lock -->
+		</frame>
+
+		<frame id="0x66a">
+			<value name="x98_rs: Cruise Control" offset="0" length="1" enum="32:OFF,33:Speed Limiter Idle,34:Speed Limiter Active,37:Cruise Control Idle,38:Cruise Control Active"></value> <!-- cc / sl active -->
+			<value id="171" offset="1" length="1" conversion="V*1.609"></value> <!-- cc / sl set speed -->
+
+			<value name="x98_rs: Driving Mode" offset="7" length="1" enum="2:Normal,4:Sport,6:Race,#:Normal"></value> <!-- driving mode -->
+		</frame>
+
+		<frame id="0x699">
+			<value name="x98_rs: Rear Window Defrost" offset="0" length="1" conversion="1-(((V-24)*1)/16)"></value> <!-- rear defrost -->
+			<value targetId="175" units="C" offset="1" length="1" conversion="V*0.5"></value> <!-- ac set temperature -->
+
+			<value name="x98_rs: AC Fan Speed" offset="3" length="1" enum="248:OFF,16:1,32:2,48:3,64:4,80:5,96:6,112:7,128:8"></value> <!-- ac fan speed -->
+		</frame>
+	</frames>
+
+</RealDashCAN>
