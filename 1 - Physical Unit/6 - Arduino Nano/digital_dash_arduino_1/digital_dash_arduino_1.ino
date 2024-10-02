@@ -64,7 +64,7 @@ void ReadDigitalStatuses() {
   output[0] = digitalRead(handbrake) == HIGH ? 0 : 1;
   output[1] = digitalRead(stalk_plus) == HIGH ? 0 : 1;
   output[2] = digitalRead(stalk_minus) == HIGH ? 0 : 1;
-  output[3] = digitalRead(oil_pressure) == HIGH ? 0 : 1;
+  output[3] = digitalRead(oil_pressure) == HIGH ? 1 : 0;
   output[4] = digitalRead(brake_fluid) == HIGH ? 0 : 1;
 }
 
