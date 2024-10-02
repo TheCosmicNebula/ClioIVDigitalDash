@@ -52,13 +52,6 @@ void loop() {
   ReadDigitalStatuses();
   ReadAnalogStatuses();
   SendCANFramesToSerial();
-
-  /*
-  for (int i = 0; i < 5; i++) 
-  {
-    Serial.println(output[i]);
-  }
-  */
   
   delay(5);
 }
@@ -80,39 +73,21 @@ void ReadAnalogStatuses() {
 void SendCANFramesToSerial() {
   byte buf[8];
 
-  // build & send CAN frames to RealDash.
-  // a CAN frame payload is always 8 bytes containing data in a manner
-  // described by the RealDash custom channel description XML file
-  // all multibyte values are handled as little endian by default.
-  // endianess of the values can be specified in XML file if it is required to use big endian values
-
-  // build 1st CAN frame
+  // build CAN frame
   memcpy(buf + 0, &ext_temp_, 2);
   memcpy(buf + 2, &fuel_level_, 2);
   memcpy(buf + 4, &output, 1);
   memcpy(buf + 5, &oil_level_, 2)
   memcpy(buf + 7, &placeholder, 1);
 
-  // write first CAN frame to serial
+  // write CAN frame to serial
   SendCANFrameToSerial(197, buf);
   
-  // build 2nd CAN frame, Arduino digital pins and 2 analog values
-  memcpy(buf, &digitalPins, 2);
-  memcpy(buf + 2, &analogPins[0], 2);
-  memcpy(buf + 4, &analogPins[1], 2);
-  memcpy(buf + 6, &analogPins[2], 2);
+  // build CAN frame
+  memcpy(buf, &placeholder, 8);
 
-  // write 2nd CAN frame to serial
+  // write CAN frame to serial
   SendCANFrameToSerial(198, buf);
-  /*
-  // build 3rd CAN frame, rest of Arduino analog values
-  memcpy(buf, &analogPins[3], 2);
-  memcpy(buf + 2, &analogPins[4], 2);
-  memcpy(buf + 4, &analogPins[5], 2);
-  memcpy(buf + 6, &analogPins[6], 2);
-
-  // write 3rd CAN frame to serial
-  SendCANFrameToSerial(197, buf);*/
 }
 
 void SendCANFrameToSerial(unsigned long canFrameId, const byte* frameData) {
@@ -127,4 +102,3 @@ void SendCANFrameToSerial(unsigned long canFrameId, const byte* frameData) {
   // CAN frame payload
   Serial.write(frameData, 8);
 }
-
