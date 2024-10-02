@@ -9,6 +9,7 @@ int handbrake = 4;
 // analogue inputs
 int fuel_level = A1;
 int ext_temp = A2;
+int oil_level = A3;
 
 // digital values
 unsigned int stalk_plus_ = 0;
@@ -21,6 +22,7 @@ unsigned int handbrake_ = 0;
 // analogue values
 unsigned int ext_temp_  = 0;
 unsigned int fuel_level_ = 0;
+unsigned int oil_level_ = 0;
 
 unsigned int placeholder = 0;
 
@@ -37,6 +39,7 @@ void setup()
 
   pinMode(fuel_level, INPUT);
   pinMode(ext_temp, INPUT);
+  pinMode(oil_pressure, INPUT);
 
   // init serial
   Serial.begin(115200);
@@ -71,6 +74,7 @@ void ReadDigitalStatuses() {
 void ReadAnalogStatuses() {
   fuel_level_ = analogRead(fuel_level);
   ext_temp_ = analogRead(ext_temp);
+  oil_level_ = analogRead(oil_level);
 }
 
 void SendCANFramesToSerial() {
@@ -83,10 +87,11 @@ void SendCANFramesToSerial() {
   // endianess of the values can be specified in XML file if it is required to use big endian values
 
   // build 1st CAN frame
-  memcpy(buf, &ext_temp_, 2);
+  memcpy(buf + 0, &ext_temp_, 2);
   memcpy(buf + 2, &fuel_level_, 2);
   memcpy(buf + 4, &output, 1);
-  memcpy(buf + 5, &placeholder, 3);
+  memcpy(buf + 5, &oil_level_, 2)
+  memcpy(buf + 7, &placeholder, 1);
 
   // write first CAN frame to serial
   SendCANFrameToSerial(197, buf);
