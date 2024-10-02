@@ -92,7 +92,7 @@
 	
 		<!-- speed -->
 		<frame id="0x217">
-			<!-- <value targetId="64" units="km/h" offset="3" length="3" endianess="big" conversion="V/100"></value> speed [km/h]-->
+			<!-- TBC -->
 		</frame>
 	
 		<!--  -->
@@ -251,7 +251,7 @@
 
 		<!--  -->
 		<frame id="0x596">
-			<value targetId="27" offset="3" length="1" conversion="V-40" units="C"></value> <!-- intake air temperature [c] -->
+			<value targetId="27" offset="3" length="1" conversion="V-40" units="C" rangeMin="-40" rangeMax="140"></value> <!-- intake air temperature [c] -->
 		</frame>
 
 		<!-- speed, odometer -->
