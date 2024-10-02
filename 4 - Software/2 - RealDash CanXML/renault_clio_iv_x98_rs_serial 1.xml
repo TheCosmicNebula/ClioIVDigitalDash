@@ -16,8 +16,10 @@
 			<value name="x98_rs: Brake Fluid Low" offset="4" startbit="4" bitcount="1"></value> <!-- brake fluid low -->
 			
 			<value targetId="180" offset="5" length="2" endianness="big" conversion="V/655.35"></value> <!-- engine oil level -->
-			<value name="x98_rs: Dimmer Value" offset="7" length="1" conversion="(100-0)/(250-2)*(V-2)+0" rangeMin="0" rangeMax="100"></value> <!-- dimmer switch position -->
 		</frame>
 		
+		<frame id="0x0c6">
+			<value name="x98_rs: Dimmer" offset="0" length="2" endianness="big" conversion="" rangeMin="0" rangeMax="100"></value> <!-- dimmer switch position -->
+		</frame>
 	</frames>
 </RealDashCAN>
