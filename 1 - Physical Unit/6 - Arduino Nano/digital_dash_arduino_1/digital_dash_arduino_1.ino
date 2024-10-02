@@ -95,7 +95,7 @@ void SendCANFramesToSerial() {
 
   // write first CAN frame to serial
   SendCANFrameToSerial(197, buf);
-  /*
+  
   // build 2nd CAN frame, Arduino digital pins and 2 analog values
   memcpy(buf, &digitalPins, 2);
   memcpy(buf + 2, &analogPins[0], 2);
@@ -103,8 +103,8 @@ void SendCANFramesToSerial() {
   memcpy(buf + 6, &analogPins[2], 2);
 
   // write 2nd CAN frame to serial
-  SendCANFrameToSerial(197, buf);
-
+  SendCANFrameToSerial(198, buf);
+  /*
   // build 3rd CAN frame, rest of Arduino analog values
   memcpy(buf, &analogPins[3], 2);
   memcpy(buf + 2, &analogPins[4], 2);
