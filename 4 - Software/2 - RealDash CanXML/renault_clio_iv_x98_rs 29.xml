@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- RealDash CAN XML description file, version 2 Requires RealDash version 1.5.8 or newer -->
+
 <!-- RENAULT Clio IV 200 EDC (x98)-->
 <RealDashCAN version="2">
+
+	<!-- frame order: targetId / name | offset / startbit | length / bitcount | endianness | conversion | units | rangeMin | rangeMax | enum -->
+
 	<frames>
 		<!--  -->
 		<frame id="0x090" size="4">
-			<!-- TBC -->
+			<!-- <value name="x98_rs: Braking Pressure" offset="0" length="1" conversion="V/28" units="bar" rangeMin="0" rangeMax="140"></value> braking pressure [bar] -->
 		</frame>
 		
 		<!--  -->
 		<frame id="0x0c6" size="4">
-			<value name="x98_rs: Wheel Angle" offset="0" length="2" endianness="big" conversion="(32768-B0*256-B1)/20" rangeMin="-200" rangeMax="200"></value> <!-- steering wheel angle [deg] -->
+			<value name="x98_rs: Wheel Angle" offset="0" length="2" endianness="big" conversion="('x98_rs: Wheel Angle Offset'-B0*256-B1)/20" rangeMin="-200" rangeMax="200"></value> <!-- steering wheel angle [deg] -->
+			<value name="x98_rs: Wheel Angle Offset" offset="4" length="2" endianness="big" conversion="V"></value> <!-- steering angle offset -->
 		</frame>
 
 		<!--  -->
@@ -24,7 +29,9 @@
 			<!-- <value name="x98_rs: Boost Test" offset="6" length="2" endianness="big" conversion="((V-12800)-1400)/1000" units="bar" rangeMin=""></value> boost [psi] -->
 		</frame>
 
+		<!-- gearbox -->
 		<frame id="0x17c">
+			<!-- <value targetId="37" offset="0" length="2" endianness="big" conversion="V*0.125"></value> engine rpm -->
 			<value name="x98_rs: Clutch Oil Temp" offset="4" length="1" conversion="V-40" units="C" rangeMin="0" rangeMax="140"></value> <!-- clutch oil temp [c] -->
 			<value name="x98_rs: Clutch Temp" offset="5" length="1" conversion="V+60" units="C" rangeMin="60" rangeMax="240"></value> <!-- clutch temperature [c] -->
 		</frame>
@@ -35,7 +42,7 @@
 
 		<!-- rpm & throttle -->
 		<frame id="0x186" size="7">
-			<value targetId="37" offset="0" length="2" conversion="V*0.125" endianness="big"></value> <!-- engine rpm -->
+			<value targetId="37" offset="0" length="2" endianness="big" conversion="V*0.125"></value> <!-- engine rpm -->
 			
 			<value name="x98_rs: Actual Torque" offset="3" startbit="4" bitcount="12" conversion="(V-800)/2"></value> <!-- actual torque [nm] -->
 			<value name="x98_rs: Requested Torque" offset="4" startbit="0" bitcount="12" conversion="(V-800)/2"></value> <!-- requested torque [nm] -->
@@ -246,19 +253,21 @@
 
 		<!--  -->
 		<frame id="0x55d">
-			<value name="x98_rs: Vehicle Locked" startbit="63" bitcount="1"></value> <!-- vehicle locked -->
+			<value name="x98_rs: Vehicle Locked" offset="7" startbit="0" bitcount="1"></value> <!-- vehicle locked -->
 		</frame>
 
 		<!--  -->
 		<frame id="0x596">
+			<!-- <value targetId="14" offset="0" length="1" conversion="V-40" units="C"></value> coolant temperature [c] -->
 			<value targetId="27" offset="3" length="1" conversion="V-40" units="C" rangeMin="-40" rangeMax="140"></value> <!-- intake air temperature [c] -->
+			<value name="x98_rs: Boost" offset="4" length="2" endianness="big" conversion="((V/10)-1200)/1000" units="bar" rangeMin="-0.9" rangeMax="1.2"> <!-- boost test -->
 		</frame>
 
 		<!-- speed, odometer -->
 		<frame id="0x5d7" size="7">
 			<value name="x98_rs: Speed Control Bit" offset="0" length="2" conversion="V/100" enum="0:0,#:1"></value> <!-- speed control bit -->
-			<value targetId="64" units="km/h" offset="0" length="2" conversion="'x98_rs: Speed Control Bit'*((V+200)/100)" endianness="big"></value> <!-- speed [km/h] -->
-			<value targetId="310" units="km" offset="2" length="4" conversion="(V>>4)*0.01" endianness="big"></value> <!-- odometer [km]-->
+			<value targetId="64" offset="0" length="2" endianness="big" conversion="'x98_rs: Speed Control Bit'*((V+200)/100)" units="km/h"></value> <!-- speed [km/h] -->
+			<value targetId="310" offset="2" length="4" endianness="big" conversion="(V>>4)*0.01" units="km"></value> <!-- odometer [km]-->
 		</frame>
 
 		<!--  -->
@@ -324,9 +333,9 @@
 			<value name="x98_rs: Driver Belt Warning" offset="1" startbit="6" bitcount="1"></value> <!-- driver seat belt warning -->
 			<value name="x98_rs: Passenger Belt Warning" offset="1" startbit="4" bitcount="1"></value> <!-- passenger seat belt warning -->
 			
-			<value name="x98_rs: Seatbelt Warning" conversion="'x98_rs: Driver Belt Warning'||'x98_rs: Passenger Belt Warning'" units="bit"></value> <!-- seatbelt warning -->
+			<value name="x98_rs: Seatbelt Warning" conversion="'x98_rs: Driver Belt Warning'||'x98_rs: Passenger Belt Warning'"></value> <!-- seatbelt warning -->
 			
-			<value name="x98_rs: Passenger Airbag Off" offset="1" startbit="3" bitcount="1" units="bit"></value> <!-- passenger airbag off -->
+			<value name="x98_rs: Passenger Airbag Off" offset="1" startbit="3" bitcount="1"></value> <!-- passenger airbag off -->
 		</frame>
 
 		<!-- abs module  -->
@@ -358,10 +367,18 @@
 
 		<!-- climate control -->
 		<frame id="0x699"> <!-- climate controls -->
-			<value name="x98_rs: Rear Window Defrost" startbit="4" bitcount="1"></value> <!-- rear defrost -->
+			<value name="x98_rs: AC Auto Mode" offset="0" startbit="1" bitcount="1"></value> <!-- ac auto mode -->
+			<value name="x98_rs: Rear Window Defrost" offset="0" startbit="4" bitcount="1"></value> <!-- rear defrost -->
 			<value targetId="175" offset="1" length="1" conversion="V*0.5" units="C"></value> <!-- ac set temperature -->
 
-			<value name="x98_rs: AC Fan Speed" offset="3" length="1" enum="248:0,16:1,32:2,48:3,64:4,80:5,96:6,112:7,128:8,#:err"></value> <!-- ac fan speed -->
+			<value name="x98_rs: AC Air Windscreen" offset="2" startbit="7" bitcount="1"></value> <!-- air windscreen -->
+			<value name="x98_rs: AC Air Passengers" offset="2" startbit="5" bitcount="1"></value> <!-- air passengers -->
+			<value name="x98_rs: AC Air Footwell" offset="2" startbit="4" bitcount="1"></value> <!-- air footwell -->
+			<value name="x98_rs: AC Recirculation" offset="2" startbit="3" bitcount="1"></value> <!-- recirculation -->
+
+			<value name="x98_rs: AC Fan Speed" offset="3" length="1" enum="248:0,16:1,32:2,48:3,64:4,80:5,96:6,112:7,128:8"></value> <!-- ac fan speed -->
+
+			<value name="x98_rs: AC Conditioning" offset="6" startbit="1" bitcount="1"></value> <!-- air conditioning on -->
 		</frame>
 		
 		<!--  -->

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- RealDash CAN XML description file, version 2 Requires RealDash version 1.5.8 or newer -->
+
+<!-- RENAULT Clio IV 200 EDC (x98) Serial Connection 2 -->
+<RealDashCAN version="2">
+	<frames>
+		<!-- Custom Arduino Provided Information -->
+		<frame id="0x0c5">
+			<value targetId="173" offset="0" length="2" endianness="big" conversion="(V/10) - 40" rangeMin="-40" rangeMax="40" units="C"></value> <!-- ambient temperature 0-1023 -->
+			<value targetId="" offset="2" length="2" conversion="V/2.55" rangeMin="0" rangeMax="100"></value> <!-- fuel level 0 - 1023 -->
+			
+			<value targetId="164" offset="4" startbit="0" bitcount="1" conversion="V-1"></value> <!-- parking brake -->
+			<value name="x98_rs: Stalk Plus" offset="4" startbit="1" bitcount="1" conversion="V-1"></value> <!-- stalk plus -->
+			<value name="x98_rs: Stalk Minus" offset="4" startbit="2" bitcount="1" conversion="V-1"></value> <!-- stalk minus -->
+			<value name="x98_rs: Oil Pressure Low" offset="4" startbit="3" bitcount="1"></value> <!-- oil pressure low -->
+			<value name="x98_rs: Brake Fluid Low" offset="4" startbit="4" bitcount="1"></value> <!-- brake fluid low -->
+			
+			<value targetId="180" offset="5" length="2" endianness="big" conversion="V/655.35"></value> <!-- engine oil level -->
+		</frame>
+		
+		<frame id="0x0c6">
+			<value name="x98_rs: Dimmer" offset="0" length="2" endianness="big" conversion="" rangeMin="0" rangeMax="100"></value> <!-- dimmer switch position -->
+		</frame>
+	</frames>
+</RealDashCAN>
